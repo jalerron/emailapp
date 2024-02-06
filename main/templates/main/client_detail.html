@@ -1,0 +1,28 @@
+{% extends 'main/index.html' %}
+
+
+{% block content1 %}
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">{{ object.last_name }} {{ object.first_name }}</h1>
+        <div>
+            <a class="btn btn-dark" href="{% url 'main:clients_update' object.pk %}">Изменить</a>
+            <a class="btn btn-danger" href="{% url 'main:clients_delete' object.pk %}">Удалить</a>
+        </div>
+    </div>
+
+    <div class="row card-body">
+        <div class="col-4">Почта</div>
+        <div class="col-8">{{ object.email }}</div>
+        <div class="col-4">Имя</div>
+        <div class="col-8">{{ object.first_name }}</div>
+        <div class="col-4">Отчество</div>
+        <div class="col-8">{{ object.middle_name }}</div>
+        <div class="col-4">Фамилия</div>
+        <div class="col-8">{{ object.last_name }}</div>
+        <div class="col-4">Коментарий</div>
+        <div class="col-8">{{ object.comments }}</div>
+    </div>
+
+
+{% endblock %}

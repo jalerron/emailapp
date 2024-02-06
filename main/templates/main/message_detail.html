@@ -1,0 +1,26 @@
+{% extends 'main/index.html' %}
+
+
+{% block content1 %}
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Сообщение - {{ object.topic }}</h1>
+        <div>
+            <a class="btn btn-dark" href="{% url 'main:mailings_update' object.pk %}">Изменить</a>
+            <a class="btn btn-danger" href="{% url 'main:mailings_delete' object.pk %}">Удалить</a>
+        </div>
+    </div>
+
+    <div class="row card-body">
+        <div class="col-4">ID</div>
+        <div class="col-8">{{ object.pk }}</div>
+        <div class="col-4">Рассылка</div>
+        <div class="col-8">{{ object.mailings }}</div>
+        <div class="col-4">Тема</div>
+        <div class="col-8">{{ object.topic }}</div>
+        <div class="col-4">Тело письма</div>
+        <div class="col-8">{{ object.body }}</div>
+    </div>
+
+
+{% endblock %}

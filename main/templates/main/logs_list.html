@@ -1,0 +1,36 @@
+{% extends 'main/index.html' %}
+
+
+{% block content1 %}
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">{{ title }}</h1>
+    </div>
+    <table class="table table-striped table-sm">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">MESSAGE</th>
+            <th scope="col">TIME</th>
+            <th scope="col">STATUS</th>
+            <th scope="col">RESPONSE</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for log in logs_list %}
+            <tr>
+                <td>{{ log.id }}</td>
+                <td>{{ log.message }}</td>
+                <td>{{ log.time }}</td>
+                <td>{{ log.status }}</td>
+                <td>{{ log.response }}</td>
+                <td>
+                    <a class="btn btn-dark" href="{% url 'main:logs_detail' log.pk %}">Подробнее</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

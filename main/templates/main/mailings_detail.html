@@ -1,0 +1,34 @@
+{% extends 'main/index.html' %}
+
+
+{% block content1 %}
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Рассылка - {{ object.title }}</h1>
+        <div>
+            <a class="btn btn-dark" href="{% url 'main:mailings_update' object.pk %}">Изменить</a>
+            <a class="btn btn-danger" href="{% url 'main:mailings_delete' object.pk %}">Удалить</a>
+        </div>
+    </div>
+
+    <div class="row card-body">
+        <div class="col-4">ID</div>
+        <div class="col-8">{{ object.pk }}</div>
+        <div class="col-4">Название</div>
+        <div class="col-8">{{ object.title }}</div>
+        <div class="col-4">Контент</div>
+        <div class="col-8">{{ object.content }}</div>
+        <div class="col-4">Клиенты</div>
+        <div class="col-8">{{ object.clients }}</div>
+        <div class="col-4">Время начала рассылки</div>
+        <div class="col-8">{{ object.start_time }}</div>
+        <div class="col-4">Время окончания рассылки</div>
+        <div class="col-8">{{ object.end_time }}</div>
+        <div class="col-4">Частота</div>
+        <div class="col-8">{{ object.frequency }}</div>
+        <div class="col-4">Статус</div>
+        <div class="col-8">{{ object.status }}</div>
+    </div>
+
+
+{% endblock %}

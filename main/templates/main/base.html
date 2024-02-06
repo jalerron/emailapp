@@ -1,0 +1,60 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.118.2">
+    <title>Dashboard Template · Bootstrap v5.3</title>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/dashboard_style.css' %}">
+
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+</head>
+
+{% include 'main/includes/svg.html' %}
+
+<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="{% url 'main:index' %}">EMAIL APP</a>
+    {% if user.is_authenticated %}
+        <div class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white">{{ user.email }}</div>
+    {% endif %}
+</header>
+<body>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+            <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu"
+                 aria-labelledby="sidebarMenuLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="sidebarMenuLabel">Company name</h5>
+                    <a class="nav-link d-flex align-items-center gap-2" href="{% url 'main:index' %}">Emailapp</a>
+                </div>
+                {% include 'main/includes/nav_bar.html' %}
+            </div>
+        </div>
+
+        {% block content %}
+        {% endblock %}
+
+    </div>
+</div>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js"
+        integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp"
+        crossorigin="anonymous"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

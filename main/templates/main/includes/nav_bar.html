@@ -1,0 +1,72 @@
+<div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page"
+               href="{% url 'main:clients_list' %}">
+                <svg class="bi">
+                    <use xlink:href="#house-fill"/>
+                </svg>
+                Клиенты
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center gap-2" href="{% url 'main:logs_list' %}">
+                <svg class="bi">
+                    <use xlink:href="#file-earmark"/>
+                </svg>
+                Логи
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center gap-2" href="{% url 'main:message_list' %}">
+                <svg class="bi">
+                    <use xlink:href="#file-earmark-text"/>
+                </svg>
+                Сообщения
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center gap-2" href="{% url 'main:mailings_list' %}">
+                <svg class="bi">
+                    <use xlink:href="#graph-up"/>
+                </svg>
+                Рассылки
+            </a>
+        </li>
+    </ul>
+
+    <hr class="my-3">
+
+    <ul class="nav flex-column mb-auto">
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center gap-2" href="{% url 'users:register' %}">
+                <svg class="bi">
+                    <use xlink:href="#gear-wide-connected"/>
+                </svg>
+                Регистрация
+            </a>
+        </li>
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2" href="{% url 'users:login' %}">
+                    <svg class="bi">
+                        <use xlink:href="#door-closed"/>
+                    </svg>
+                    <form method="post" action="{% url 'users:logout' %}">
+                        {% csrf_token %}
+                        <button class="nav-link d-flex align-items-center gap-2" type="submit">Выйти</button>
+                    </form>
+                </a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2" href="{% url 'users:login' %}">
+                    <svg class="bi">
+                        <use xlink:href="#door-closed"/>
+                    </svg>
+                    Войти
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</div>

@@ -1,0 +1,20 @@
+{% extends 'main/index.html' %}
+
+{% block content1 %}
+<div class="col-12">
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <p>Хотите удалить сообщение?</p>
+                        <button type="submit" class="btn btn-primary">Подтвердить</button>
+                        <a type="button" class="btn btn-sm btn-outline-secondary" href="{% url 'main:message_detail' object.pk %}">Отмена</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

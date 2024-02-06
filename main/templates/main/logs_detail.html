@@ -1,0 +1,28 @@
+{% extends 'main/index.html' %}
+
+
+{% block content1 %}
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Лог - {{ object.pk }}</h1>
+        <div>
+            <a class="btn btn-dark" href="{% url 'main:logs_update' object.pk %}">Изменить</a>
+            <a class="btn btn-danger" href="{% url 'main:logs_delete' object.pk %}">Удалить</a>
+        </div>
+    </div>
+
+    <div class="row card-body">
+        <div class="col-4">ID</div>
+        <div class="col-8">{{ object.pk }}</div>
+        <div class="col-4">Сообщение</div>
+        <div class="col-8">{{ object.message }}</div>
+        <div class="col-4">Время</div>
+        <div class="col-8">{{ object.time }}</div>
+        <div class="col-4">Статус</div>
+        <div class="col-8">{{ object.status }}</div>
+        <div class="col-4">Ответ</div>
+        <div class="col-8">{{ object.response }}</div>
+    </div>
+
+
+{% endblock %}
