@@ -1,13 +1,30 @@
+from django.contrib import messages
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView, TemplateView
 
+from blog.models import Blog
 from emailapp import settings
+from main.forms import MessageForm, ClientForm, LogsForm, MailingsForm
 from main.models import Client, Logs, Message, Mailings
+from main.task import EmailTask
 
 
-def index(request):
-    return render(request, 'main/index.html')
+class HomeView(TemplateView):
+    template_name = 'main/home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['count_mailings'] = Mailings.objects.count()
+        context['active_mailings'] = Mailings.objects.filter(status='started')
+        context['count_clients'] = Client.objects.count()
+        context['latest_posts'] = (Blog.objects.order_by('-date_published')[:3])
+        context['most_viewed_posts'] = Blog.objects.order_by('-views_count')[:3]
+        return context
+
+
+# def index(request):
+#     return render(request, 'main/index.html')
 
 
 class ClientListView(ListView):
@@ -33,10 +50,25 @@ class ClientsDetailView(DetailView):
         return context
 
 
+class ClientCreateView(CreateView):
+    model = Client
+    template_name = 'main/clients_form.html'
+    form_class = ClientForm
+    success_url = reverse_lazy('main:clients_list')
+
+
 class ClientsUpdateView(UpdateView):
     model = Client
     template_name = 'main/clients_form.html'
     fields = ('__all__')
+
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        try:
+            EmailTask.send_emails()
+        except Exception as e:
+            messages.error(self.request, f'Ошибка при отправке рассылки: {e}')
+        return result
 
     def get_success_url(self):
         return reverse_lazy('main:clients_list')
@@ -49,6 +81,7 @@ class ClientsDeleteView(DeleteView):
     def get_success_url(self):
         return reverse_lazy('main:clients_list')
 
+
 class LogsListView(ListView):
     model = Logs
     template_name = 'main/logs_list.html'
@@ -58,6 +91,13 @@ class LogsListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Логи'
         return context
+
+
+class LogsCreateView(CreateView):
+    model = Logs
+    template_name = 'main/logs_form.html'
+    form_class = LogsForm
+    success_url = reverse_lazy('main:logs_list')
 
 
 class LogsDetailView(DetailView):
@@ -97,6 +137,12 @@ class MessageListView(ListView):
         return context
 
 
+class MessageCreateView(CreateView):
+    model = Message
+    form_class = MessageForm
+    success_url = reverse_lazy('main:message_list')
+
+
 class MessageDetailView(DetailView):
     model = Message
     template_name = 'main/message_detail.html'
@@ -132,6 +178,13 @@ class MailingsListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Рассылки'
         return context
+
+
+class MailingsCreateView(CreateView):
+    model = Mailings
+    template_name = 'main/mailings_form.html'
+    form_class = MailingsForm
+    success_url = reverse_lazy('main:mailings_list')
 
 
 class MailingsDetailView(DetailView):

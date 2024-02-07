@@ -1,0 +1,38 @@
+{% extends 'main/index.html' %}
+
+{% block content1 %}
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">{{ title }}</h1>
+        <a class="btn btn-dark" href="{% url 'blog:blog_create' %}">Создать элемент</a>
+    </div>
+
+    <div class="col-8">
+        {% for object in object_list %}
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-6">
+                                {{ object.title }}
+                            </div>
+                            <div class="col-6">
+                                <a class="btn btn-outline-primary align-self-end" href="{% url 'blog:blog_detail' object.pk %}">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        {{ object.content }}
+                    </div>
+                    <div class="card-footer bg_dark">
+                        Количество просмотров - {{ object.views_count }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+
+{% endblock %}

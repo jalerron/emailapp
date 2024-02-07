@@ -1,0 +1,52 @@
+{% extends 'main/index.html' %}
+
+
+{% block content1 %}
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Статистика</h1>
+    </div>
+    <div class="col-4 card mb-4">
+        <div class="card-header">Количество рассылок</div>
+        <div class="card-body">
+            {{ count_mailings }}
+        </div>
+    </div>
+    <div class="col-4 card mb-4">
+        <div class="card-header">Активные рассылки</div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                {% for elem in active_mailings %}
+                    <li class="list-group-item">{{ elem.title }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="col-4 card mb-4">
+        <div class="card-header">Количество клиентов</div>
+        <div class="card-body">
+            {{ count_clients }}
+        </div>
+    </div>
+
+    <div class="col-4 card mb-4">
+        <div class="card-header">Последняя статьи</div>
+        <div class="card-body">
+            {% for blog in latest_posts %}
+                {{ blog.title }}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-4 card mb-4">
+        <div class="card-header">Самые просматриваемые статьи</div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                {% for blog in most_viewed_posts %}
+                    <li class="list-group-item">{{ blog.title }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+
+{% endblock %}

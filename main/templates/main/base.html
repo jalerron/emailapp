@@ -24,7 +24,7 @@
 {% include 'main/includes/svg.html' %}
 
 <header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="{% url 'main:index' %}">EMAIL APP</a>
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="{% url 'main:home' %}">EMAIL APP</a>
     {% if user.is_authenticated %}
         <div class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white">{{ user.email }}</div>
     {% endif %}
@@ -39,7 +39,7 @@
                  aria-labelledby="sidebarMenuLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="sidebarMenuLabel">Company name</h5>
-                    <a class="nav-link d-flex align-items-center gap-2" href="{% url 'main:index' %}">Emailapp</a>
+                    <a class="nav-link d-flex align-items-center gap-2" href="{% url 'main:home' %}">Emailapp</a>
                 </div>
                 {% include 'main/includes/nav_bar.html' %}
             </div>
