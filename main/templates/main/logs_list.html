@@ -10,7 +10,7 @@
         <thead>
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">MESSAGE</th>
+            <th scope="col">MESSAGE TITLE</th>
             <th scope="col">TIME</th>
             <th scope="col">STATUS</th>
             <th scope="col">RESPONSE</th>
@@ -20,13 +20,10 @@
         {% for log in logs_list %}
             <tr>
                 <td>{{ log.id }}</td>
-                <td>{{ log.message }}</td>
+                <td>{{ log.message_title }}</td>
                 <td>{{ log.time }}</td>
                 <td>{{ log.status }}</td>
                 <td>{{ log.response }}</td>
-                <td>
-                    <a class="btn btn-dark" href="{% url 'main:logs_detail' log.pk %}">Подробнее</a>
-                </td>
             </tr>
         {% endfor %}
         </tbody>

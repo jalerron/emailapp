@@ -8,8 +8,10 @@
                 <div class="card-body">
                     <form method="post">
                         {% csrf_token %}
+                        {% if perms.main.delete_mailings %}
                         <p>Хотите удалить рассылку?</p>
                         <button type="submit" class="btn btn-primary">Подтвердить</button>
+                        {% endif %}
                         <a type="button" class="btn btn-sm btn-outline-secondary" href="{% url 'main:logs_detail' object.pk %}">Отмена</a>
                     </form>
                 </div>

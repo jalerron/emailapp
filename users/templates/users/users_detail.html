@@ -1,0 +1,37 @@
+{% extends 'main/index.html' %}
+{% load mediapath %}
+
+
+{% block content1 %}
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">{{ object.username }}</h1>
+        <div>
+            {% if perms.main.change_message or request.user.is_staff %}
+                <a class="btn btn-dark" href="{% url 'users:users_update' object.pk %}">Изменить</a>
+            {% endif %}
+            {% if request.user.is_superuser or user.email == request.user.email %}
+                <a class="btn btn-danger" href="{% url 'users:users_delete' object.pk %}">Удалить</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row card-body">
+        <div class="col-4">ID</div>
+        <div class="col-8">{{ object.pk }}</div>
+        <div class="col-4">Email</div>
+        <div class="col-8">{{ object.email }}</div>
+        <div class="col-4">Username</div>
+        <div class="col-8">{{ object.username }}</div>
+        <div class="col-4">Телефон</div>
+        <div class="col-8">{{ object.phone }}</div>
+        <div class="col-4">Страна</div>
+        <div class="col-8">{{ object.country }}</div>
+        <div class="col-4">Аватар</div>
+        <div class="col-8">
+            <img class="mg-thumbnail" src="{{ object.avatar|mediapath }}" width="225" height="225"/>
+        </div>
+    </div>
+
+
+{% endblock %}

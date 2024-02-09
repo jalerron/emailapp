@@ -6,8 +6,12 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Рассылка - {{ object.title }}</h1>
         <div>
-            <a class="btn btn-dark" href="{% url 'main:mailings_update' object.pk %}">Изменить</a>
-            <a class="btn btn-danger" href="{% url 'main:mailings_delete' object.pk %}">Удалить</a>
+            {% if perms.main.change_mailings or request.user.is_staff %}
+                <a class="btn btn-dark" href="{% url 'main:mailings_update' object.pk %}">Изменить</a>
+            {% endif %}
+            {% if perms.main.delete_mailings or request.user.is_staff %}
+                <a class="btn btn-danger" href="{% url 'main:mailings_delete' object.pk %}">Удалить</a>
+            {% endif %}
         </div>
     </div>
 
@@ -19,7 +23,11 @@
         <div class="col-4">Контент</div>
         <div class="col-8">{{ object.content }}</div>
         <div class="col-4">Клиенты</div>
-        <div class="col-8">{{ object.clients }}</div>
+        <div class="col-8">
+            {% for client in clients %}
+                <div class="col-8">{{ client }}</div>
+            {% endfor %}
+        </div>
         <div class="col-4">Время начала рассылки</div>
         <div class="col-8">{{ object.start_time }}</div>
         <div class="col-4">Время окончания рассылки</div>
@@ -28,6 +36,8 @@
         <div class="col-8">{{ object.frequency }}</div>
         <div class="col-4">Статус</div>
         <div class="col-8">{{ object.status }}</div>
+        <div class="col-4">Владелец</div>
+        <div class="col-8">{{ object.owner }}</div>
     </div>
 
 

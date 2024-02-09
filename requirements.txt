@@ -7,4 +7,8 @@ ipython
 pytils
 django-crispy-forms==1.14.0
 redis
-python-dotenv
+python-dotenv~=1.0.1
+APScheduler~=3.10.4
+django_apscheduler
+django-bootstrap-datepicker==1.5.0
+django-bootstrap-datepicker-plus==5.0.5
