@@ -8,12 +8,12 @@
                     <div class="card-body">
                         <form method="post">
                             {% csrf_token %}
-                            <p>Хотите удалить клиента?</p>
-                            {% if perms.main.delete_client %}
+                            <p>Хотите удалить пользователя?</p>
+                            {% if perms.users.delete_user or user.email == request.user.email %}
                                 <button type="submit" class="btn btn-primary">Подтвердить</button>
                             {% endif %}
                             <a type="button" class="btn btn-sm btn-outline-secondary"
-                               href="{% url 'main:clients_detail' object.pk %}">Отмена</a>
+                               href="{% url 'users:users_list' %}">Отмена</a>
                         </form>
                     </div>
                 </div>

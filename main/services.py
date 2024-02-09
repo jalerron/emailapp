@@ -1,18 +1,24 @@
+from django.core.cache import cache
 from django.core.mail import send_mail
 
+from emailapp import settings
+from main.models import Client
 
-class EmailSender:
-    def __init__(self, subject, message, from_email, recipient_list):
-        self.subject = subject
-        self.message = message
-        self.from_email = from_email
-        self.recipient_list = recipient_list
 
-    def send(self):
-        send_mail(
-            self.subject,
-            self.message,
-            self.from_email,
-            self.recipient_list,
-            fail_silently=False,
-        )
+def send_mass_mail(subject: str, message: str, client_list: list):
+    send_mail(
+        subject,
+        message,
+        settings.EMAIL_HOST_USER,
+        client_list
+    )
+
+
+def get_client_cache(user):
+    key = 'client_list'
+    client_list = cache.get(key)
+    if client_list is None:
+        client_list = Client.objects.filter(owner=user)
+        cache.set(key, client_list)
+    return client_list
+

@@ -5,9 +5,9 @@ from django.views.decorators.cache import cache_page
 
 from main.apps import MainConfig
 from main.views import ClientListView, LogsListView, MessageListView, MailingsListView, ClientsDetailView, \
-    ClientsUpdateView, ClientsDeleteView, LogsDetailView, LogsUpdateView, LogsDeleteView, MailingsDetailView, \
+    ClientsUpdateView, ClientsDeleteView, MailingsDetailView, \
     MailingsUpdateView, MailingsDeleteView, MessageDetailView, MessageDeleteView, MessageUpdateView, MessageCreateView, \
-    ClientCreateView, LogsCreateView, MailingsCreateView, HomeView
+    ClientCreateView, MailingsCreateView, HomeView
 
 app_name = MainConfig.name
 urlpatterns = [
@@ -20,10 +20,10 @@ urlpatterns = [
     path('client/<int:pk>/delete/', ClientsDeleteView.as_view(), name='clients_delete'),
 
     path('logs/', LogsListView.as_view(), name='logs_list'),
-    path('create_logs/', LogsCreateView.as_view(), name='logs_create'),
-    path('logs/<int:pk>/', LogsDetailView.as_view(), name='logs_detail'),
-    path('update_logs/<int:pk>/', LogsUpdateView.as_view(), name='logs_update'),
-    path('logs/<int:pk>/delete/', LogsDeleteView.as_view(), name='logs_delete'),
+    # path('create_logs/', LogsCreateView.as_view(), name='logs_create'),
+    # path('logs/<int:pk>/', LogsDetailView.as_view(), name='logs_detail'),
+    # path('update_logs/<int:pk>/', LogsUpdateView.as_view(), name='logs_update'),
+    # path('logs/<int:pk>/delete/', LogsDeleteView.as_view(), name='logs_delete'),
 
     path('message/', MessageListView.as_view(), name='message_list'),
     path('message/<int:pk>/', MessageDetailView.as_view(), name='message_detail'),

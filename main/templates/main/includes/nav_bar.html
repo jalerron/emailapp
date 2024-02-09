@@ -47,6 +47,26 @@
 
     <ul class="nav flex-column mb-auto">
         <li class="nav-item">
+            {% for group in request.user.groups.all %}
+                {% if group.name == 'Manager' %}
+                    <a class="nav-link d-flex align-items-center gap-2" href="{% url 'users:users_list' %}">
+                        <svg class="bi">
+                            <use xlink:href="#gear-wide-connected"/>
+                        </svg>
+                        Пользователи
+                    </a>
+                {% endif %}
+            {% endfor %}
+            {% if request.user.is_superuser %}
+                <a class="nav-link d-flex align-items-center gap-2" href="{% url 'users:users_list' %}">
+                    <svg class="bi">
+                        <use xlink:href="#gear-wide-connected"/>
+                    </svg>
+                    Пользователи
+                </a>
+            {% endif %}
+        </li>
+        <li class="nav-item">
             <a class="nav-link d-flex align-items-center gap-2" href="{% url 'users:register' %}">
                 <svg class="bi">
                     <use xlink:href="#gear-wide-connected"/>

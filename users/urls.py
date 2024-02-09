@@ -4,7 +4,8 @@ from django.urls import path, reverse_lazy
 from django.views.decorators.cache import cache_page
 
 from users.apps import UsersConfig
-from users.views import RegisterView, verify_view, EmailVerifyView
+from users.views import RegisterView, verify_view, EmailVerifyView, UsersListView, UserDetailView, UserUpdateView, \
+    UserDeleteView
 
 app_name = UsersConfig.name
 
@@ -29,4 +30,9 @@ urlpatterns = [
     path('password_reset/complete/',
          PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),
          name='password_reset_complete'),
+
+    path('users/', UsersListView.as_view(), name='users_list'),
+    path('users/<int:pk>/', UserDetailView.as_view(), name='users_detail'),
+    path('update_user/<int:pk>/', UserUpdateView.as_view(), name='users_update'),
+    path('delete_user/<int:pk>/', UserDeleteView.as_view(), name='users_delete'),
 ]
